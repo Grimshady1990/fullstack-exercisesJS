@@ -64,12 +64,83 @@
 
 // console.log(obj.for + obj.let + obj.return);
 
-let obj = {
-    0: "test",
-};
+// let obj = {
+//     0: "test",
+// };
 
-console.log(obj["0"]);
-console.log(obj[0]);
+// console.log(obj["0"]);
+// console.log(obj[0]);
 
-// continue working through the follow lesson
-// https://javascript.info/object
+// let obj = {};
+// obj.__proto__ = 5;
+// console.log(obj.__proto__);
+
+
+// let user = {};
+
+// console.log(user.noSuchProperty === undefined);
+
+// let user = { name: "John", age: 30 };
+
+// console.log( "age" in user);
+// console.log( "blablabla" in user);
+
+
+
+// let user = {
+//     name: "John",
+//     age: 30,
+//     isAdmin: true
+// };
+
+// for (let key in user) {
+//     console.log( key );
+
+//     console.log( user[key] );
+// }
+
+// let codes = {
+//     "49": "Germany",
+//     "41": "Switzerland",
+//     "44": "Great Britain",
+//     "1": "USA"
+// };
+
+// for (let code in codes) {
+//     console.log(code);
+// }
+
+// let user = {
+//     name: "John",
+//     surname: "Smith",
+// }
+
+// console.log(user.name);
+
+// user.name = "Pete";
+
+// console.log(user.name);
+
+// delete user.name;
+
+// console.log(user.name);
+
+// function isEmpty(obj) {
+//     if (Object.keys(obj).length === 0) {
+//         return true;
+//     }
+//     else {
+//         return false;
+//     }
+// }
+
+// let schedule = {};
+
+// console.log(isEmpty(schedule));
+
+// schedule["8:30"] = "get up!";
+
+// console.log(isEmpty(schedule));
+
+// // continue working through the follow lesson
+// // https://javascript.info/object
