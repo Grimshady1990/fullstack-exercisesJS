@@ -142,5 +142,47 @@
 
 // console.log(isEmpty(schedule));
 
+// let salaries = {
+//     John: 5000,
+//     Ann: 3000,
+//     Pete: 2000
+// }
+
+// function sumSalaries() {
+//     let sum = 0;
+    
+//     for (let [key, value] of Object.entries(salaries)){
+//         sum += value;
+        
+//     }
+//     return sum;
+// }
+
+
+// console.log(sumSalaries());
+
+
+
 // // continue working through the follow lesson
 // // https://javascript.info/object
+
+let menu = {
+    height: 200,
+    width: 300,
+    title: "My menu"
+};
+
+function multiplyNumeric(obj) {
+    for (let [key, value] of Object.entries(obj)) {
+        if (typeof value === 'number') {
+            obj[key] *= 2;
+        }
+    }
+    console.log(typeof(obj));
+
+}
+
+console.log(multiplyNumeric(menu));
+console.log(menu);
+
+
