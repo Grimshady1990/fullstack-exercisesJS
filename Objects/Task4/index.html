@@ -1,17 +1,86 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Object-oriented JavaScript example</title>
+    <meta charset="utf-8"/>
+    <title>Object basics: Task 1</title>
+    <style>
+      p {
+        color: purple;
+        margin: 0.5em 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+    </style>
+    
   </head>
 
   <body>
-    <p>This example requires you to enter commands in your browser's JavaScript console (see <a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_are_browser_developer_tools">What are browser developer tools</a> for more information).</p>
-    
-    <script src="index.js">
 
-    </script>
+    <section class="preview">
+
+
+
+    </section>
+
   </body>
+  <script>
+    const cat = {
+      name : 'Bertie',
+      breed : 'Cymric',
+      color : 'white',
+      greeting: function() {
+        console.log(`Hello, said ${this.name} the ${this.breed}`);
+      }
+    }
+
+    const cat2 = {
+      name : 'Freya',
+      breed : 'Siamese',
+      color : 'black',
+      greeting: function() {
+        console.log(`Hello, said ${this.name} the ${this.breed}`);
+      }
+    }
+
+    // Add your code here
+    let catName = cat["name"];
+
+    cat.greeting();
+    cat2.greeting();
+
+    cat.color = "black";
+
+    function Cat(name, breed, color) {
+        this.name = name;
+        this.breed = breed;
+        this.color = color;
+        this.greeting = function () {
+            console.log(`Hello, said ${this.name} the ${this.breed}`);
+        };
+
+    };
+
+    const cat01 = new Cat("Bobby", "TopCat", "Ginger");
+    const cat02 = new Cat("Tobi", "TomCat", "black");
+
+    cat01.greeting();
+    console.log(cat02.name);
+    cat02.greeting();
+
+    // Don't edit the code below here!
+
+    const section = document.querySelector('section');
+
+    let para1 = document.createElement('p');
+    let para2 = document.createElement('p');
+
+    para1.textContent = `The cat's name is ${ catName }.`;
+    para2.textContent = `The cat's color is ${ cat.color }.`;
+
+    section.appendChild(para1);
+    section.appendChild(para2);
+  </script>
 
 </html>

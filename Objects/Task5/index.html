@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Object basics: Task 2</title>
+    <style>
+      p {
+        color: purple;
+        margin: 0.5em 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+    </style>
+    
+  </head>
+
+  <body>
+
+    <section class="preview">
+
+
+
+    </section>
+
+  </body>
+  <script>
+    let bandInfo;
+
+    // Add your code here
+
+    const band = {
+        name: "The Streets",
+        nationality: "British",
+        genre: "Garage",
+        members: 1,
+        formed: 1994,
+        split: false,
+        albums: [
+            {
+                name: "Original Pirate Material",
+                released: 2002,
+        },
+        {
+            name: "A Grand Don't come for free",
+            released: 2004,
+        },
+        {
+            name: "The Hardest Way To Make A Easy Living",
+            released: 2006,
+        },
+    ],
+    };
+
+    console.log(band.albums[0]["name"])
+
+    bandInfo = `${band.name} is the musical project of Mike Skinner, a ${band.nationality} rapper, producer, and songwriter from Birmingham, England. Known for blending UK ${band.genre}, hip-hop, spoken word, and electronica, The Streets offers a raw and honest portrayal of British working-class life, often told through Skinner's conversational vocal style and storytelling lyrics.
+
+The project has been active for ${2025 - band.formed} years, with official releases beginning in 2001. The Streets rose to prominence with their debut album, ${band.albums[0]["name"]}, which was released in ${band.albums[0]["released"]}. This album became a defining record of early 2000s UK music, praised for its gritty realism and innovative sound.
+
+Mike Skinner continues to release music under The Streets name, making it one of the most influential acts in UK urban music.`
+
+    // Don't edit the code below here!
+
+    const section = document.querySelector('section');
+    let para1 = document.createElement('p');
+    para1.textContent = bandInfo;
+    section.appendChild(para1);
+  </script>
+
+</html>
