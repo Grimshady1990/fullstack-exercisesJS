@@ -98,3 +98,5 @@ function sum(a) {
 }
 
 console.log(sum(1)(2)(3)(4));
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures#closure
