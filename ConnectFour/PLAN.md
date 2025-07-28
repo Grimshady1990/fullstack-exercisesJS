@@ -172,3 +172,104 @@ return { getBoard, dropToken, printBoard };
 ```
 
 This return statement creates and returns an object containing three functions: getBoard, dropToken, and printBoard. This allows any code that uses the game board to call those methods from outside, while keeping everything else (like the actual board array) private inside the function.
+
+Thats the game board and cell function out of the way now lets take a look at the game controller.
+
+## Game Controller Function
+
+This Function is what controls the flow of the game. It holds the the player objects, keeps track of who the active player is, prints the updated board, switches players, and plays a round by calling the dropToken function.
+
+Let's start from the top.
+
+```js
+function GameController(
+  playerOneName = "Player One",
+  playerTwoName = "Player Two"
+)
+```
+
+This function takes two parameters which are assigned to the player objects. this is how we give names to each player.
+
+```js
+const board = Gameboard();
+```
+Next it creates a variable that has access to the Gameboard function this is how we can call functions from the game board for example board.dropToken.
+
+```js
+const players = [
+    {
+      name: playerOneName,
+      token: 1
+    },
+    {
+      name: playerTwoName,
+      token: 2
+    }
+  ];
+```
+
+Next we add the player objects which are stored in a array called players.
+
+the next one is a little tricky so we will spend some time digesting it.
+
+```js
+ let activePlayer = players[0];
+
+  const switchPlayerTurn = () => {
+    activePlayer = activePlayer === players[0] ? players[1] : players[0];
+  };
+  const getActivePlayer = () => activePlayer;
+
+  const printNewRound = () => {
+    board.printBoard();
+    console.log(`${getActivePlayer().name}'s turn.`);
+  };
+```
+
+My guess is that this function switches the index of both players every time it is called. But how it is doing this is more important to understand.
+
+```js
+let activePlayer = players[0];
+```
+
+first it assigns the activePlayer var to the first index.
+
+```js
+const switchPlayerTurn = () => {
+    activePlayer = activePlayer === players[0] ? players[1] : players[0];
+  };
+```
+
+Next it has a switch player function that I think is saying if active player is equal to index 0 then index 1 is index 0, but im not familiar with the syntax so I will dig deeper.
+
+Okay so This function uses the ternary operator `(condition ? valueIfTrue : valueIfFalse)` to toggle the active player.
+
+It checks:
+  activePlayer === players[0]
+  → If true, it sets activePlayer to players[1].
+  → If false, it sets activePlayer back to players[0].
+
+So it's a one-liner toggle between two values — super handy in 2-player games.
+
+So The switchPlayerTurn function checks who the current active player is. If it's players[0], it switches to players[1]; otherwise, it switches back to players[0]. This is done using a ternary operator, which is a shorthand way of writing an if-else statement.
+
+This is how this function would look as a if statement:
+
+```js
+const switchPlayerTurn = () => {
+  if (activePlayer === players[0]) {
+    activePlayer = players[1];
+  } else {
+    activePlayer = players[0];
+  }
+};
+```
+
+
+
+
+
+
+
+
+
