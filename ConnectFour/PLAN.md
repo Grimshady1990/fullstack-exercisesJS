@@ -208,7 +208,7 @@ const players = [
   ];
 ```
 
-Next we add the player objects which are stored in a array called players.
+Next, we create two player objects and store them in an array called players.
 
 the next one is a little tricky so we will spend some time digesting it.
 
@@ -264,6 +264,49 @@ const switchPlayerTurn = () => {
   }
 };
 ```
+
+```js
+ const getActivePlayer = () => activePlayer;
+
+  const printNewRound = () => {
+    board.printBoard();
+    console.log(`${getActivePlayer().name}'s turn.`);
+  };
+```
+
+In the next part a function is created that returns the activePlayer.
+
+This is used inside the print new round function to address which players turn it is after it prints the board.
+
+
+```js
+const playRound = (column) => {
+
+    console.log(
+      `Dropping ${getActivePlayer().name}'s token into column ${column}...`
+    );
+    board.dropToken(column, getActivePlayer().token);
+
+    switchPlayerTurn();
+    printNewRound();
+  };
+```
+
+the last function in this factory is the play round function which takes the column as a parameter. it makes use of both the column number and the getActivePlayer function to drop the correct token into the correct column.
+
+The last thing it executes is the switch player function and the printNewRound function.
+
+```js
+  printNewRound();
+
+  return {
+    playRound,
+    getActivePlayer
+  };
+```
+
+Finally it runs print new round so the game starts automatically and returns playRound and getActivePlayer so they can be accessed else where.
+
 
 
 
