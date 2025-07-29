@@ -1,88 +1,99 @@
 # Introduction
 
-I want to start by saying that this is not a project but is a very important lesson.
+I want to start by saying this isn't just a project—it's an important lesson.
 
-My project to create a tic-tac-toe game has become impossible for me because I cant thing in design patterns.
+My attempt to build a tic-tac-toe game became impossible because I struggle to think in design patterns.
 
-I was given a article called "Building A House From The Inside Out" It talks about not thinking about the final product and instead thinking deeper first about the structures and things that make the house work.
+I was given an article called *“Building a House From the Inside Out.”* It talks about focusing less on the final product and more on the structures and systems that make the “house” (or project) work.
 
-While the metaphor didn’t give me direct answers, it pointed me toward a valuable idea: breaking things down from the inside out. 
+While the metaphor didn’t give me direct answers, it pointed me toward something valuable: **breaking things down from the inside out**.
 
 # My Problem
 
-So what is my problem? That would be a long conversation depending on the context, but in this context my problem is simple. I can't read code well.
+So what’s my problem?
 
-Sure I know how to read my own Lego Duplo creations but when it comes to other peoples mammoth Meccano structures then I am completely lost.
+That could be a long conversation depending on the context, but in this case, it's simple:
+**I can’t read code well.**
 
-Reaching this point in The Odin Project has humbled me a little to say the least, but I am not one to cowier away from a challenge and I have enough self awareness to take a step back study when I reach a new echelon im not prepared for.
+Sure, I can read my own little LEGO Duplo creations, but when it comes to other people’s mammoth Meccano structures, I’m completely lost.
 
-So how can this "building a house" article help me.
+Reaching this point in The Odin Project has humbled me a bit—but I’m not one to cower away from a challenge. I have enough self-awareness to take a step back and study when I reach an echelon I’m not yet prepared for.
 
-The article itself is not of much use but he has included a project that the author has written himself which is a game of Connect 4.
+So how can this “building a house” article help me?
 
-This is where I am going to solve a huge problem that I have which is understand complex code (complex to me). This will help me in to ways:
+Well, the article itself isn’t particularly helpful—but the author included a **Connect Four** project they wrote. That’s where things get interesting.
 
-    1. It will help me better read and understand other peoples code.
-    2. It will help me to be able to write and plan more complex code.
+Studying this project will help me tackle a huge problem: understanding complex code (or at least code that feels complex *to me*). This will help in two major ways:
+
+1. I’ll get better at reading and understanding other people’s code.
+2. I’ll improve my ability to write and plan more complex code of my own.
 
 # The Plan
 
-Okay great! So how am I actually going to use this information and turn it into a opportunity.
+Great! So how am I going to use this as an opportunity?
 
-The how is easy I plan to spend as much time as is needed looking at this code I will live and breath this gentlemen console version of connect 4.
+Simple: I’ll dedicate as much time as needed to studying this code. I’ll live and breathe this gentleman’s console version of Connect Four.
 
-I will write my own version of his game building it piece by piece leaving myself comments to prove I have found understanding.
+I’ll write my **own** version of his game, building it piece by piece, leaving myself comments to prove I understand each part.
 
-Once I have come to my conclusions I will use chatGPT as a mentor to mark my work to make sure im not getting the wrong end of the stick I will be sure to set it up in a way that forces me to find answers and not just mindlessly receive them.
+Once I’ve come to my conclusions, I’ll use ChatGPT as a mentor to help review my work—not to spoon-feed me answers, but to verify that I’m truly grasping the material.
 
 # Notes
 
-This is where all my project notes will be stored the format will be split into headers for each problem that needs to be discussed (only because I like headers for easy reading).
+This is where all my project notes will be stored. I’ll split them into headers for easy reading and focused discussion.
+
+---
 
 ## First Glance
 
-At first glance I can see that the project is split in to 3 function factories called:
+At first glance, I can see the project is built from **three factory functions**:
 
-- Gameboard
-- Cell
-- GameController
+* `Gameboard`
+* `Cell`
+* `GameController`
 
-Nothing is outside of these functions, nothing is global, and they are Capitalized which makes me think that these are actually constructors. 
+Nothing is global—everything lives inside these functions. They’re capitalized, which usually implies constructors, but in this case, they’re just **factory functions** that return objects.
 
-NOTE: Capitalized functions aren't necessarily constructors — that’s more a convention. These are factory functions that return objects.
+> **Note:** Capitalized function names are a convention. These are not constructors using `new`, they are regular functions returning objects.
 
-Lets go over each one and take a guess at what we think each one is doing then we will ask ChatGPT if we were right.
+Let’s go over each one and guess what it does—then we’ll ask ChatGPT if we were right.
 
-## Gameboard Function
+---
 
-The Gameboard function seems to hold everything that concerns the game board.
+## `Gameboard` Function
 
-The first thing it does is create 3 variables that are needed to create the game board
+This function handles everything related to the game board.
+
+It starts with three variables:
 
 ```js
 const rows = 6;
 const columns = 7;
 const board = [];
 ```
-How do these variables create the game board? They are fed to a nested loop which is common for making 2d arrays.
 
-Let's take a look at this loop and try to figure out what it is doing.
+These are used in a nested loop to create a 2D array (the game grid):
 
 ```js
 for (let i = 0; i < rows; i++) {
-    board[i] = [];
-    for (let j = 0; j < columns; j++) {
-      board[i].push(Cell());
-    }
+  board[i] = [];
+  for (let j = 0; j < columns; j++) {
+    board[i].push(Cell());
   }
+}
 ```
-I think the first for loop is using the rows variable to create six empty arrays, then using the columns variable in the nested loop to fill them with values from the Cell function.
 
-So WTH is the cell function??
+So what's happening here?
 
-## Cell Function
+* The outer loop creates 6 empty arrays (rows).
+* The inner loop fills each row with 7 `Cell()` objects.
+* This gives us a 6x7 board made up of cell objects.
 
-The cell function manages the state of each cell meaning it is where the functions that change the value of a cell are stored
+---
+
+## `Cell` Function
+
+This function manages the state of each cell on the board:
 
 ```js
 function Cell() {
@@ -96,218 +107,210 @@ function Cell() {
 
   return {
     addToken,
-    getValue
+    getValue,
   };
 }
 ```
 
-This is a simple factory function that stores the value of each cell this contains two functions one that adds a token (changes the state of a cell from the default value 0, to the players marker either 1 or 2), And the second function calls the value variable through closure. This setup enforces immutability — I can’t just go cell.value = 1 from the outside. I must go through addToken().
+This simple factory function stores a `value` (initially `0`) and exposes two methods:
 
-With that out of the way lets get back to the game board.
+* `addToken(player)` sets the cell’s value to the player number (1 or 2).
+* `getValue()` returns the value.
 
-# Game Board Function (continued)
+Because `value` is scoped inside the function, outside code **can’t modify it directly**—it can only be changed via `addToken()`. This is a nice example of **encapsulation** using closures.
 
-After creating the board an arrow function called `getBoard` is made that calls the board variable again through closure.
+---
+
+## Back to `Gameboard`
+
+The next method is `getBoard`:
 
 ```js
 const getBoard = () => board;
 ```
 
-The next one is a little bit tricky and might be difficult for me to process lets first take a look and discuss.
+This just gives read access to the private `board` array.
+
+### Now for the tough one: `dropToken`
 
 ```js
 const dropToken = (column, player) => {
+  const availableCells = board
+    .filter((row) => row[column].getValue() === 0)
+    .map((row) => row[column]);
 
-    const availableCells = board.filter((row) => row[column].getValue() === 0).map(row => row[column]);
+  if (!availableCells.length) return;
 
-    if (!availableCells.length) return;
-
-    const lowestRow = availableCells.length - 1;
-    board[lowestRow][column].addToken(player);
-  };
+  const lowestRow = availableCells.length - 1;
+  board[lowestRow][column].addToken(player);
+};
 ```
 
-It starts with a arrow function that accepts a column and a player parameter.
+Let’s break it down:
 
-Then it moves on to what looks like another arrow function but more complex. My guess is it creates a variable that is equal to board.filter and uses a arrow to create a if statement that is equal to zero it will then use another arrow to return row[column], no joke I have no idea what this is doing.
+* It takes `column` and `player` as arguments.
+* It filters the board for rows where the cell in that column is empty (`getValue() === 0`).
+* Then it **maps** those rows into a list of the actual available cells in that column.
+* If there are no available cells, it returns early.
+* Otherwise, it selects the **last available cell** (lowest on the board) and calls `addToken(player)` on it.
 
-After it has filtered through the board if there is no length then that means the move is invalid and the code stops running.
+> **Note:** Your first instinct about `.filter().map()` was that it was “finding something.” Even though you didn’t fully get it at first, you followed the thread and found clarity—that's gold.
 
-If there is length then the code continues to the final stage and adds the players token at the lowest row, but again i have no idea how it gets there.
+---
 
-After speaking with ChatGPT I now have a better understanding of what is going on here so I will share my final thoughts.
-
-NOTE: Even though you misunderstood .filter(...).map(...) at first, you had the instinct that it was finding something — and you later clarified it fully. That growth is gold.
-
-### Final Thoughts (dropToken)
-
-dropToken is an arrow function that takes two parameters: column and player. It starts by using the column parameter to target a specific column on the board. Then, it filters the rows in that column to find cells with a value of 0, meaning they are empty. These cells are mapped into a new array of just the available cells in that column.
-
-Next, the function checks whether the availableCells list has any items. If the list is empty (length === 0), it means the column is full, and the function exits early.
-
-If there are available cells, the function continues. It calculates the index of the lowest empty cell by using availableCells.length - 1, which gives the last item in the list. Finally, it calls .addToken(player) on that cell, updating its value with the player's token.
-
-## Game Board (continued)
-
-Wow that drop token took some heavy lifting, but I feel I have a much better understanding of what it is doing now.
-
-Right on with the show, Next up is the function that prints the board to the console.
+## `printBoard`
 
 ```js
 const printBoard = () => {
-    const boardWithCellValues = board.map((row) => row.map((cell) => cell.getValue()))
-    console.log(boardWithCellValues);
-  };
+  const boardWithCellValues = board.map((row) =>
+    row.map((cell) => cell.getValue())
+  );
+  console.log(boardWithCellValues);
+};
 ```
 
-This function takes no parameters. It uses .map() to loop through a 2D board and build a new 2D array made of the numeric values from each cell. It does this by calling getValue() on each cell. The new array is stored in boardWithCellValues and then printed to the console. .map() is used here because it returns a transformed version of the original array.
+This function:
 
-NOTE: the use of .map() here helps preserve the structure of the 2D array. This means it's perfect for transforming it without flattening or changing shape.
+* Loops through the 2D board.
+* Replaces each `Cell()` with its `.getValue()`.
+* Prints the resulting 2D array to the console.
 
+Using `.map()` here preserves the structure of the original array while transforming it—perfect for this use case.
 
-and finally the game board has this return 
+---
+
+## Gameboard Return
 
 ```js
 return { getBoard, dropToken, printBoard };
 ```
 
-This return statement creates and returns an object containing three functions: getBoard, dropToken, and printBoard. This allows any code that uses the game board to call those methods from outside, while keeping everything else (like the actual board array) private inside the function.
+This exposes the key functions to the outside world while keeping everything else private.
 
-Thats the game board and cell function out of the way now lets take a look at the game controller.
+---
 
-## Game Controller Function
+## `GameController` Function
 
-This Function is what controls the flow of the game. It holds the the player objects, keeps track of who the active player is, prints the updated board, switches players, and plays a round by calling the dropToken function.
+This is the brain of the game. It:
 
-Let's start from the top.
+* Creates players
+* Tracks whose turn it is
+* Calls `dropToken`
+* Prints the board
+* Switches players
+
+Let’s walk through it:
+
+### Initialization
 
 ```js
-function GameController(
-  playerOneName = "Player One",
-  playerTwoName = "Player Two"
-)
+function GameController(playerOneName = "Player One", playerTwoName = "Player Two")
 ```
 
-This function takes two parameters which are assigned to the player objects. this is how we give names to each player.
+We can pass in custom names. Defaults are provided.
 
 ```js
 const board = Gameboard();
 ```
-Next it creates a variable that has access to the Gameboard function this is how we can call functions from the game board for example board.dropToken.
+
+We now have access to all public methods from `Gameboard`.
 
 ```js
 const players = [
-    {
-      name: playerOneName,
-      token: 1
-    },
-    {
-      name: playerTwoName,
-      token: 2
-    }
-  ];
+  { name: playerOneName, token: 1 },
+  { name: playerTwoName, token: 2 },
+];
 ```
 
-Next, we create two player objects and store them in an array called players.
+Two player objects stored in an array.
 
-the next one is a little tricky so we will spend some time digesting it.
+---
 
-```js
- let activePlayer = players[0];
-
-  const switchPlayerTurn = () => {
-    activePlayer = activePlayer === players[0] ? players[1] : players[0];
-  };
-  const getActivePlayer = () => activePlayer;
-
-  const printNewRound = () => {
-    board.printBoard();
-    console.log(`${getActivePlayer().name}'s turn.`);
-  };
-```
-
-My guess is that this function switches the index of both players every time it is called. But how it is doing this is more important to understand.
+### Switching Players
 
 ```js
 let activePlayer = players[0];
-```
 
-first it assigns the activePlayer var to the first index.
-
-```js
 const switchPlayerTurn = () => {
-    activePlayer = activePlayer === players[0] ? players[1] : players[0];
-  };
-```
-
-Next it has a switch player function that I think is saying if active player is equal to index 0 then index 1 is index 0, but im not familiar with the syntax so I will dig deeper.
-
-Okay so This function uses the ternary operator `(condition ? valueIfTrue : valueIfFalse)` to toggle the active player.
-
-It checks:
-  activePlayer === players[0]
-  → If true, it sets activePlayer to players[1].
-  → If false, it sets activePlayer back to players[0].
-
-So it's a one-liner toggle between two values — super handy in 2-player games.
-
-So The switchPlayerTurn function checks who the current active player is. If it's players[0], it switches to players[1]; otherwise, it switches back to players[0]. This is done using a ternary operator, which is a shorthand way of writing an if-else statement.
-
-This is how this function would look as a if statement:
-
-```js
-const switchPlayerTurn = () => {
-  if (activePlayer === players[0]) {
-    activePlayer = players[1];
-  } else {
-    activePlayer = players[0];
-  }
+  activePlayer = activePlayer === players[0] ? players[1] : players[0];
 };
 ```
 
-```js
- const getActivePlayer = () => activePlayer;
+This uses a **ternary operator** to toggle between the two players.
 
-  const printNewRound = () => {
-    board.printBoard();
-    console.log(`${getActivePlayer().name}'s turn.`);
-  };
+Equivalent `if` version:
+
+```js
+if (activePlayer === players[0]) {
+  activePlayer = players[1];
+} else {
+  activePlayer = players[0];
+}
 ```
 
-In the next part a function is created that returns the activePlayer.
+```js
+const getActivePlayer = () => activePlayer;
+```
 
-This is used inside the print new round function to address which players turn it is after it prints the board.
+Returns the currently active player.
 
+---
+
+### Printing a New Round
+
+```js
+const printNewRound = () => {
+  board.printBoard();
+  console.log(`${getActivePlayer().name}'s turn.`);
+};
+```
+
+Prints the updated board and shows which player is next.
+
+---
+
+### Playing a Round
 
 ```js
 const playRound = (column) => {
-
-    console.log(
-      `Dropping ${getActivePlayer().name}'s token into column ${column}...`
-    );
-    board.dropToken(column, getActivePlayer().token);
-
-    switchPlayerTurn();
-    printNewRound();
-  };
+  console.log(`Dropping ${getActivePlayer().name}'s token into column ${column}...`);
+  board.dropToken(column, getActivePlayer().token);
+  switchPlayerTurn();
+  printNewRound();
+};
 ```
 
-the last function in this factory is the play round function which takes the column as a parameter. it makes use of both the column number and the getActivePlayer function to drop the correct token into the correct column.
+This is the game loop:
 
-The last thing it executes is the switch player function and the printNewRound function.
+1. Logs the move.
+2. Drops the token.
+3. Switches player.
+4. Prints the board.
+
+---
+
+### Final Return
 
 ```js
-  printNewRound();
+printNewRound();
 
-  return {
-    playRound,
-    getActivePlayer
-  };
+return {
+  playRound,
+  getActivePlayer,
+};
 ```
 
-Finally it runs print new round so the game starts automatically and returns playRound and getActivePlayer so they can be accessed else where.
+Prints the board to start the game and exposes `playRound` and `getActivePlayer` for external use.
 
+---
 
+## Final Thoughts
+
+This was a deep dive. The `dropToken` function, in particular, required some serious heavy lifting. But now that I’ve worked through it, I feel far more confident in understanding how the parts of a game can come together using design principles like encapsulation, modularity, and closures.
+
+My plan going forward is to rebuild this game piece by piece starting with creating pseudo code and to use ChatGPT for feedback—not as a crutch, but as a checkpoint for my understanding.
+
+Let’s keep going.
 
 
 
