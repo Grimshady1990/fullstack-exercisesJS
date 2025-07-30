@@ -1,7 +1,3 @@
-Sure thing, Frankie! Here’s your **Connect Four developer console pseudo-code** rewritten in a **clear, structured, and A-level style** that’s consistent and easy to follow:
-
----
-
 ### **Factory Function: `Cell`**
 
 1. Create a variable `value` initialized to `0` (0 = empty cell).
@@ -89,6 +85,5 @@ Sure thing, Frankie! Here’s your **Connect Four developer console pseudo-code*
 * **Precise method explanations** → Uses exact `.map` and `.filter` behavior.
 * **Readable for any developer** → Someone could implement this directly in JS.
 
----
 
-Do you want me to **also create a visual diagram** showing how `map` and `filter` transform the board for `dropToken`? It will make it click instantly.
+
