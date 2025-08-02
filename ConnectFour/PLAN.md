@@ -312,8 +312,11 @@ My plan going forward is to rebuild this game piece by piece starting with creat
 
 Let’s keep going.
 
+## We Keep Moving
 
+I have rewritten the code with comments written pseudo and I feel that I have a good handle on how this code works. Next I would like to and write it again but this time without looking at the code at all.
 
+If I do get completely stuck then I will use these notes for guidance.
 
 
 
