@@ -318,6 +318,12 @@ I have rewritten the code with comments written pseudo and I feel that I have a 
 
 If I do get completely stuck then I will use these notes for guidance.
 
+## On To The DOM
+
+Okay I have successfully wrote the game without guidance, analyzed the code extensively even watched youtube videos explaining in fine detail what .map and .filter do, I even threw .reduce in there for good measure.
+
+I think I have digested all that can be digested from this code so lets hit the home straight and get this game running on the DOM.
+
 
 
 
